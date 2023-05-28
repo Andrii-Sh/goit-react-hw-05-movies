@@ -6,7 +6,6 @@ const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState({});
 
   const { movieId } = useParams();
-  // console.log(movieId);
 
   useEffect(() => {
     async function fetchMovie() {
@@ -14,7 +13,6 @@ const MovieDetails = () => {
         const data = await getMovieDetails(movieId);
         console.log(data);
         setMovieDetails(data);
-        console.log('dfgdfgd');
       } catch (error) {
         console.log(error);
       }
@@ -27,9 +25,27 @@ const MovieDetails = () => {
     <div>
       <div>
         <img
-          src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`}
-          alt=""
+          src={
+            `https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}` ?? ''
+          }
+          alt="movie poster"
+          width={200}
+          height={300}
         />
+        <div>
+          <h2>{movieDetails.title}</h2>
+          <p>
+            User score: {Math.round((movieDetails.vote_average / 10) * 100)}%
+          </p>
+          <h3>Overview</h3>
+          <p>{movieDetails.overview}</p>
+          <h3>Genres</h3>
+          <ul>
+            {!movieDetails.genres
+              ? ''
+              : movieDetails.genres.map(item => <li>{item.name}</li>)}
+          </ul>
+        </div>
       </div>
       <ul>
         Additional information
@@ -46,3 +62,7 @@ const MovieDetails = () => {
 };
 
 export default MovieDetails;
+
+/* {movieDetails && movieDetails.genres.map(item => <p>{item.name}</p>)} */
+
+/* {movieDetails && <p>{movieDetails.genres}</p>} */
