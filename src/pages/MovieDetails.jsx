@@ -11,7 +11,6 @@ const MovieDetails = () => {
     async function fetchMovie() {
       try {
         const data = await getMovieDetails(movieId);
-        console.log(data);
         setMovieDetails(data);
       } catch (error) {
         console.log(error);
@@ -26,7 +25,9 @@ const MovieDetails = () => {
       <div>
         <img
           src={
-            `https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}` ?? ''
+            movieDetails.poster_path
+              ? `https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`
+              : ''
           }
           alt="movie poster"
           width={200}
@@ -43,7 +44,9 @@ const MovieDetails = () => {
           <ul>
             {!movieDetails.genres
               ? ''
-              : movieDetails.genres.map(item => <li>{item.name}</li>)}
+              : movieDetails.genres.map(item => (
+                  <li key={item.id}>{item.name}</li>
+                ))}
           </ul>
         </div>
       </div>
