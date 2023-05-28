@@ -37,10 +37,33 @@ export async function getMovieCredits(id) {
 
 }
 
+export async function getMovieReviews(id) {
+    const response = await axios.get(`${BASE_URL}3/movie/${id}/reviews?language=en-US&page=1`, {
+        headers: {
+            Accept: "application/json",
+            Authorization: API_KEY
+        },
+    });
+    return response.data;
 
-// /movies/get-movie-details
+}
+
+export async function searchMovies(query) {
+    const response = await axios.get(`${BASE_URL}3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`, {
+        headers: {
+            Accept: "application/json",
+            Authorization: API_KEY
+        },
+    });
+    return response.data;
+
+}
+
+
+
+// search-movies 
 
 // curl --request GET \
-//      --url 'https://api.themoviedb.org/3/movie/603692/credits?language=en-US' \
+//      --url 'https://api.themoviedb.org/3/search/movie?query=batman&include_adult=false&language=en-US&page=1' \
 //      --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlYzAyZDhkMzRkYzcyMjdiZTNjNzA5MzM2N2M4OGViZiIsInN1YiI6IjY0NzA5N2YwNzcwNzAwMDBhOTQ3ZGQ2NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.f3KkCJqrVoPiUwfFpJk-pqYlEvN4ebC6X_KzPPDzK-s' \
 //      --header 'accept: application/json'

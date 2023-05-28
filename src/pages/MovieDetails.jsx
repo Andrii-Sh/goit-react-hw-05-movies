@@ -65,7 +65,3 @@ const MovieDetails = () => {
 };
 
 export default MovieDetails;
-
-/* {movieDetails && movieDetails.genres.map(item => <p>{item.name}</p>)} */
-
-/* {movieDetails && <p>{movieDetails.genres}</p>} */
