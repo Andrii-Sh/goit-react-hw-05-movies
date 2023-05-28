@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Outlet, Link, useParams } from 'react-router-dom';
+import { Outlet, Link, useParams, useLocation } from 'react-router-dom';
 import { getMovieDetails } from '../api/themoviedbApi';
 
 const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState({});
+  const location = useLocation();
+  console.log(location.state);
 
   const { movieId } = useParams();
 
@@ -22,6 +24,10 @@ const MovieDetails = () => {
 
   return (
     <div>
+      {/* {location.state.from ? } */}
+      <Link to={location.state.from ? location.state.from : '/'}>
+        <button type="button">Go back</button>
+      </Link>
       <div>
         <img
           src={

@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { searchMovies } from '../api/themoviedbApi';
 
 const Movies = () => {
-  const [query, setQuery] = useState('');
+  // const [query, setQuery] = useState('');
   const [searchedMovies, setSearchedMovies] = useState([]);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get('query');
+
+  const location = useLocation();
+  console.log(location);
 
   useEffect(() => {
     if (!query) {
@@ -24,36 +30,30 @@ const Movies = () => {
     fetchMovie();
   }, [query]);
 
-  // function handleSubmitForm(evt) {
-  //   evt.preventDefault();
-  //   setQuery(evt.target.value);
-
-  // }
-
-  // function handleChangeInput(evt) {
-  //   setQuery(evt.target.value);
-  // }
-
   function handleSubmitForm(evt) {
     evt.preventDefault();
-    setQuery(evt.target.elements.inputText.value);
+    setSearchParams({ query: evt.target.elements.inputText.value });
     evt.target.reset();
-    // setQuery('');
   }
 
   return (
     <div>
       <form onSubmit={handleSubmitForm}>
         <input type="text" name="inputText" />
-        <button type="submit"></button>
+        <button type="submit">Search</button>
       </form>
       <ul>
-        {searchedMovies &&
+        {searchedMovies.length > 0 &&
           searchedMovies.map(item => (
             <li key={item.id}>
-              <Link to={`${item.id}`}>{item.title}</Link>
+              <Link to={`${item.id}`} state={{ from: location }}>
+                {item.title}
+              </Link>
             </li>
           ))}
+        {/* {searchedMovies.length === 0 && query !== '' && (
+          <p>Sorry, there are no mathes with "{query}"</p>
+        )} */}
       </ul>
     </div>
   );
