@@ -3,14 +3,11 @@ import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { searchMovies } from '../api/themoviedbApi';
 
 const Movies = () => {
-  // const [query, setQuery] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
   const [searchedMovies, setSearchedMovies] = useState([]);
 
-  const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query');
-
   const location = useLocation();
-  console.log(location);
 
   useEffect(() => {
     if (!query) {
@@ -20,7 +17,6 @@ const Movies = () => {
     async function fetchMovie() {
       try {
         const data = await searchMovies(query);
-        // console.log(data);
         setSearchedMovies(data.results);
       } catch (error) {
         console.log(error);
