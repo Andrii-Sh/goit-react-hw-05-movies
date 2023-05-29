@@ -3,7 +3,7 @@ import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { searchMovies } from '../api/themoviedbApi';
 
 const Movies = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams('');
   const [searchedMovies, setSearchedMovies] = useState([]);
 
   const query = searchParams.get('query');
@@ -47,9 +47,9 @@ const Movies = () => {
               </Link>
             </li>
           ))}
-        {/* {searchedMovies.length === 0 && query !== '' && (
-          <p>Sorry, there are no mathes with "{query}"</p>
-        )} */}
+        {searchedMovies.length === 0 && query && (
+          <p>Sorry, there are no matches with "{query}"</p>
+        )}
       </ul>
     </div>
   );
