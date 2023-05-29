@@ -12,7 +12,6 @@ export async function getTrandingMovies() {
         },
     });
     return response.data.results;
-    // console.log(response.data.results);
 }
 
 export async function getMovieDetails(id) {
@@ -59,11 +58,3 @@ export async function searchMovies(query) {
 
 }
 
-
-
-// search-movies 
-
-// curl --request GET \
-//      --url 'https://api.themoviedb.org/3/search/movie?query=batman&include_adult=false&language=en-US&page=1' \
-//      --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlYzAyZDhkMzRkYzcyMjdiZTNjNzA5MzM2N2M4OGViZiIsInN1YiI6IjY0NzA5N2YwNzcwNzAwMDBhOTQ3ZGQ2NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.f3KkCJqrVoPiUwfFpJk-pqYlEvN4ebC6X_KzPPDzK-s' \
-//      --header 'accept: application/json'

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Suspense } from 'react';
 import { Outlet, Link, useParams, useLocation } from 'react-router-dom';
 import { getMovieDetails } from '../api/themoviedbApi';
 
@@ -47,11 +47,10 @@ const MovieDetails = () => {
           <p>{movieDetails.overview}</p>
           <h3>Genres</h3>
           <ul>
-            {!movieDetails.genres
-              ? ''
-              : movieDetails.genres.map(item => (
-                  <li key={item.id}>{item.name}</li>
-                ))}
+            {movieDetails.genres &&
+              movieDetails.genres.map(item => (
+                <li key={item.id}>{item.name}</li>
+              ))}
           </ul>
         </div>
       </div>
@@ -64,7 +63,9 @@ const MovieDetails = () => {
           <Link to="reviews">Reviews</Link>
         </li>
       </ul>
-      <Outlet />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };

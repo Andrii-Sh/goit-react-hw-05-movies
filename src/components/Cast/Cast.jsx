@@ -35,7 +35,7 @@ const Cast = () => {
               width={80}
             />
             <h3>{item.original_name}</h3>
-            <p>{item.character}</p>
+            <p>Character: {item.character}</p>
           </li>
         ))}
       </ul>
