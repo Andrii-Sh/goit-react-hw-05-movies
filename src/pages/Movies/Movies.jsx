@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
-import { searchMovies } from '../api/themoviedbApi';
+import { searchMovies } from '../../api/themoviedbApi';
+import css from './Movies.module.css';
 
 const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams('');
@@ -35,7 +36,7 @@ const Movies = () => {
   return (
     <div>
       <form onSubmit={handleSubmitForm}>
-        <input type="text" name="inputText" />
+        <input type="text" name="inputText" className={css.Movie__SearchForm} />
         <button type="submit">Search</button>
       </form>
       <ul>
@@ -56,6 +57,3 @@ const Movies = () => {
 };
 
 export default Movies;
-// value = { query };
-
-// onChange = { handleChangeInput };

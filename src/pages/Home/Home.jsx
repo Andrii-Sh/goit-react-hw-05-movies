@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getTrandingMovies } from '../api/themoviedbApi';
+import { getTrandingMovies } from '../../api/themoviedbApi';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
@@ -19,6 +19,7 @@ const Home = () => {
 
   return (
     <div>
+      <h2>Trading today</h2>
       <ul>
         {tradingMovies.map(item => (
           <li key={item.id}>

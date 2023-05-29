@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, Suspense } from 'react';
 import { Outlet, Link, useParams, useLocation } from 'react-router-dom';
-import { getMovieDetails } from '../api/themoviedbApi';
+import { getMovieDetails } from '../../api/themoviedbApi';
+import css from './MovieDetails.module.css';
 
 const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState({});
@@ -25,9 +26,11 @@ const MovieDetails = () => {
   return (
     <div>
       <Link to={backLinkLocation.current}>
-        <button type="button">Go back</button>
+        <button type="button" className={css.MovieDetails__backBtn}>
+          Go back
+        </button>
       </Link>
-      <div>
+      <div className={css.MovieDetails__content}>
         <img
           src={
             movieDetails.poster_path
@@ -46,7 +49,7 @@ const MovieDetails = () => {
           <h3>Overview</h3>
           <p>{movieDetails.overview}</p>
           <h3>Genres</h3>
-          <ul>
+          <ul className={css.MovieDetails__genres}>
             {movieDetails.genres &&
               movieDetails.genres.map(item => (
                 <li key={item.id}>{item.name}</li>
@@ -54,15 +57,20 @@ const MovieDetails = () => {
           </ul>
         </div>
       </div>
-      <ul>
-        Additional information
-        <li>
-          <Link to="cast">Cast</Link>
-        </li>
-        <li>
-          <Link to="reviews">Reviews</Link>
-        </li>
-      </ul>
+      <div className={css.MovieDetails__addInfoWrapper}>
+        <h4 className={css.MovieDetails__addInfoTitle}>
+          Additional information
+        </h4>
+        <ul className={css.MovieDetails__addInfoList}>
+          <li>
+            <Link to="cast">Cast</Link>
+          </li>
+          <li>
+            <Link to="reviews">Reviews</Link>
+          </li>
+        </ul>
+      </div>
+
       <Suspense fallback={<div>Loading...</div>}>
         <Outlet />
       </Suspense>

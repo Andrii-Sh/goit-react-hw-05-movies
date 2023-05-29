@@ -1,0 +1,11 @@
+.Movie__SearchForm {
+    width: 300px;
+
+    border: 1px solid #a78484;
+    border-radius: 2px; 
+     
+    &:focus {
+        border: 3px solid #1a91b999;
+        outline: none;
+    }
+}
