@@ -4,6 +4,7 @@ import { searchMovies } from '../../api/themoviedbApi';
 import css from './Movies.module.css';
 
 const Movies = () => {
+  const [inputText, setInputText] = useState('');
   const [searchParams, setSearchParams] = useSearchParams('');
   const [searchedMovies, setSearchedMovies] = useState([]);
 
@@ -14,6 +15,8 @@ const Movies = () => {
     if (!query) {
       return;
     }
+
+    setInputText(query);
 
     async function fetchMovie() {
       try {
@@ -29,14 +32,23 @@ const Movies = () => {
 
   function handleSubmitForm(evt) {
     evt.preventDefault();
-    setSearchParams({ query: evt.target.elements.inputText.value });
-    evt.target.reset();
+    setSearchParams({ query: inputText });
+  }
+
+  function handleOnChange(evt) {
+    setInputText(evt.target.value);
   }
 
   return (
     <div>
       <form onSubmit={handleSubmitForm}>
-        <input type="text" name="inputText" className={css.Movie__SearchForm} />
+        <input
+          type="text"
+          name="inputText"
+          value={inputText}
+          onChange={handleOnChange}
+          className={css.Movie__SearchForm}
+        />
         <button type="submit">Search</button>
       </form>
       <ul>
